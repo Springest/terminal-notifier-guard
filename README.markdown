@@ -135,6 +135,42 @@ can be a web or file URL, or any custom URL scheme.
 Specifies a shell command to run when the user clicks the notification.
 
 
+## Deploying to Heroku
+
+If you are working in a team environment with multiple developers that may not
+all be using OS X, the common usage is to add something like the following to
+your Gemfile:
+
+`gem 'terminal-notifier-guard', require: false if RUBY_PLATFORM =~ /darwin/i`
+
+However, this will spawn a slew of errors when deploying to Heroku.  It will
+assume you removed the gem from the Gemfile and didn't run bundle, and will
+fail your deploy.
+
+To fix this issue, set up a new group in your Gemfile:
+
+```ruby
+group :darwin do
+  gem 'terminal-notifier-guard'
+end
+```
+
+Users programming on Linux or Windows can then bundle using the following:
+
+`bundle install --without darwin`
+
+They will only need to do this once - it will remember the setting for future
+execution of bundle.
+
+Additionally, you will need to set a configuration variable on Heroku:
+
+`heroku config:add BUNDLE_WITHOUT='darwin [any other groups to exclude]' [--app my-app-name]`
+
+Heroku picks up that configuration variable when it receives a git push and
+excludes those gems automatically.  You can also add `development` and `test`
+to the list to prevent those gems from being added in your production environment.
+
+
 ## License
 
 All the works are available under the MIT license.
