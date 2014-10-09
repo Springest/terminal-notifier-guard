@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'bacon'
+  gem.add_development_dependency 'rspec-core'
   gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'mocha-on-bacon'
 end

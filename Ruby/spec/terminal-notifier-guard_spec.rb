@@ -1,3 +1,4 @@
+require 'pry'
 require 'rubygems'
 require 'bacon'
 require 'mocha'
@@ -8,7 +9,25 @@ Bacon.summary_at_exit
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'terminal-notifier-guard'
 
-describe "TerminalNotifier::Guard" do
+describe TerminalNotifier::Guard do
+
+  describe ".available?" do
+    [ '10.8', '10.10' ].each do |version|
+      specify "OS X #{version} is supported" do
+        described_class.stubs(:`).returns("Darwin\n", "#{version}\n")
+        expect(described_class.available?).to be_truthy
+        described_class.unstub(:`)
+      end
+    end
+    [ '10.7', '10.6' ].each do |version|
+      specify "OS X #{version} is not supported" do
+        described_class.stubs(:`).returns("Darwin\n", "#{version}\n")
+        expect(described_class.available?).to be_falsey
+        described_class.unstub(:`)
+      end
+    end
+  end
+
   describe ".execute" do
     it "executes the tool with the given options" do
       command = [TerminalNotifier::Guard::Notify::BIN_PATH, '-message', 'ZOMG']
