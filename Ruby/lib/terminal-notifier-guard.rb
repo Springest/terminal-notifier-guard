@@ -12,7 +12,8 @@ module TerminalNotifier
     # Returns wether or not the current platform is Mac OS X 10.8, or higher.
     def self.available?
       if @available.nil?
-        @available = `uname`.strip == 'Darwin' && `sw_vers -productVersion`.strip >= '10.8'
+        @available = `uname`.strip == 'Darwin' &&
+          Gem::Version.new(`sw_vers -productVersion`.strip) >= Gem::Version.new('10.8')
       end
       @available
     end
