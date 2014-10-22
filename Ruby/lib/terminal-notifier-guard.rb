@@ -9,12 +9,14 @@ module TerminalNotifier
     include TerminalNotifier::Guard::Failed
     include TerminalNotifier::Guard::Pending
 
+    class UnsupportedPlatformError < StandardError; end
     # Returns wether or not the current platform is Mac OS X 10.8, or higher.
     def self.available?
-      if @available.nil?
-        @available = `uname`.strip == 'Darwin' && `sw_vers -productVersion`.strip >= '10.8'
-      end
-      @available
+      @available ||= Gem::Version.new(version) > Gem::Version.new('10.8')
+    end
+
+    def self.version
+      @version ||= `uname`.strip == 'Darwin' && `sw_vers -productVersion`.strip
     end
 
     def self.execute(verbose, options)
@@ -44,7 +46,7 @@ module TerminalNotifier
         end
         result
       else
-        raise "terminal-notifier is only supported on Mac OS X 10.8, or higher."
+        raise UnsupportedPlatformError, "terminal-notifier is only supported on Mac OS X 10.8, or higher."
       end
     end
 
