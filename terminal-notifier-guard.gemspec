@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.homepage         = 'https://github.com/Springest/terminal-notifier-guard'
 
   gem.files            = ['lib/terminal-notifier-guard.rb']
-  gem.require_paths    = ['lib']
+  gem.require_paths    = ['lib','icons']
 
   gem.extra_rdoc_files = ['README.markdown']
 
