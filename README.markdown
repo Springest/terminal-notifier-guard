@@ -43,6 +43,14 @@ version `1.5.3` for OSX 10.8 support.
 
 ## Usage
 
+Add following line to your Guardfile.
+
+```ruby
+notification :terminal_notifier
+```
+
+Then [Guard][GUARD] become to send Notifications to your Notification Center.
+
 You could also use the notifier directly.
 
 Examples are:
