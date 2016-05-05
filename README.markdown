@@ -4,13 +4,13 @@ A simple Ruby wrapper around the [`terminal-notifier`](https://github.com/alloy/
 tool, which allows you to send User Notifications to the Notification Center on
 Mac OS X 10.8, or higher.
 
-This version has 4 different icons included for each status that
+This version has 4 different icons and sounds included for each status that
 [Guard][GUARD] supports:
 
- 1. Failed
- 2. Notify
- 3. Pending
- 4. Success
+ 1. Failed (Sound is Sosumi)
+ 2. Notify (Sound is Blow)
+ 3. Pending (Sound is Morse)
+ 4. Success (Sound is Hero)
 
 
 ## Installation
