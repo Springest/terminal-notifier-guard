@@ -49,7 +49,7 @@ module TerminalNotifier
 
     def self.execute(verbose, options)
       if available? && installed?
-        options.merge!({ :contentImage=> GUARD_ICON, :appIcon => icon(options.delete(:type)) })
+        options.merge!({ :contentImage=> icon(options.delete(:type)), :appIcon => GUARD_ICON })
 
         command = [bin_path, *options.map { |k,v| ["-#{k}", v.to_s] }.flatten]
         if RUBY_VERSION < '1.9'
