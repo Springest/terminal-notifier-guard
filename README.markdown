@@ -60,12 +60,12 @@ notification :terminal_notifier, app_name: "MyApp ::", activate: 'com.googlecode
 
 You can override the binary path detection with an environment variable. This solves a problem where the default binary found by `which` is the Ruby gem version of `terminal-notifier`. This version is slow, especially in a Bundler environment.
 
-In this scenario we would much rather use the version installed by Homebrew at `/usr/local/bin/terminal-notifier` which is noticeably faster.
+In this scenario we would much rather use the version installed by Homebrew, which is noticeably faster.
 
 This gem allows you to set an environment variable to explicitly specify the binary to use, like this:
 
 ```bash
-export TERMINAL_NOTIFIER_BIN=/usr/local/bin/terminal-notifier
+export TERMINAL_NOTIFIER_BIN=$(brew --prefix)/bin/terminal-notifier
 ```
 
 _When using guard to monitor test results in TDD, speed is of the essence. Using the right binary can save a half second or more during each test run, which doesn't seem like much but makes a big difference in productivity._
